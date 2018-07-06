@@ -7,7 +7,7 @@ Drop casava vendor failed fastq reads
 2. `make`
 
 This tool needs you to have zlib installed and uses the provided version of
-Heng Li's seqtk (https://github.com/lh3/seqtk)[https://github.com/lh3/seqtk].
+Heng Li's seqtk[https://github.com/lh3/seqtk](https://github.com/lh3/seqtk).
 
 # Usage
 
