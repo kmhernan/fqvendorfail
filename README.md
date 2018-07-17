@@ -21,4 +21,4 @@ Usage: fqvendorfail -o <output prefix> <R1.fq> [<R2.fq>]
 Provide an output prefix (e.g., `/path/my_file`) and 1 fastq file if single-end
 or two if paired-end. The tool will add the `_R1.fq.gz` and `_R2.fq.gz` to the 
 output prefix you provide. When paired, it will check that the R1 and R2 seqids
-match. (_Note: I still need to test when the fastq has `/1` and `/2` in it_).
+match.
