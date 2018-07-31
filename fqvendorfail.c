@@ -67,37 +67,6 @@ int next_pe(kseq_t *seqf, kseq_t *seqr)
     }
 }
 
-int pe_check_names(kseq_t *seqf, kseq_t *seqr)
-{
-    if (strcmp(seqf->name.s, seqr->name.s) != 0) {
-        char *sf = index(seqf->name.s, '/');
-        char *sr = index(seqr->name.s, '/');
-        if (sf && sr) {
-            char * fname = malloc(sf - seqf->name.s);
-            for (int i = 0; i<sf-seqf->name.s; i++) {
-                fname[i] = seqf->name.s[i];
-            }
-
-            char * rname = malloc(sr - seqr->name.s);
-            for (int i = 0; i<sr-seqr->name.s; i++) {
-                rname[i] = seqr->name.s[i];
-            }
-
-            if(strcmp(fname, rname) != 0) {
-                free(fname);
-                free(rname);
-                return 1;
-            }
-            free(fname);
-            free(rname);
-        }
-        else {
-            return 1;
-        }
-    }
-    return 0;
-}
-
 int process_se(const char *f, const char *opfx)
 {
     gzFile fp;
@@ -214,18 +183,7 @@ int process_pe(const char *ff, const char *fr, const char *opfx)
     {
         total++;
 
-        if(pe_check_names(seqf, seqr) != 0) {
-            fprintf(stderr, "[E::] Seqname mismatch! %s %s.\n", seqf->name.s, seqr->name.s);
-            kseq_destroy(seqf);
-            kseq_destroy(seqr);
-            gzclose(ffp);
-            gzclose(frp);
-            gzclose(ofp);
-            gzclose(orp);
-            return 1;
-        }
-
-        else if (is_failed(seqf) || is_failed(seqr)) {
+        if (is_failed(seqf) || is_failed(seqr)) {
             removed++;
             continue;
         }
